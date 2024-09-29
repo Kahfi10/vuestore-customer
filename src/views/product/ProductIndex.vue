@@ -11,7 +11,7 @@
         <img :src="product.imageUrl" alt="">
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-price">Rp{{ product.price }}</p>
-        <router-link :to="{ name: 'product-detail', params: {id:123}}">
+        <router-link :to="{ name: 'productdetail', params: {id: product.id}}">
           <button>Detail</button>`
         </router-link>
         </div>

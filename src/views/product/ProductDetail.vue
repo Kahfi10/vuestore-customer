@@ -1,13 +1,46 @@
 /* eslint-disable */
 <template>
     <div>
-        <h1>Product Detail Page</h1>
+        <div id="page-wrap" v-if="product">
+          <div id="img-wrap">
+            <img :src="product.imageUrl" alt="">
+          </div>
+          <div id="product-details">
+            <h1>{{ product.name }}</h1>
+            <h3 id="price">Rp{{ product.price }}</h3>
+            <p>Average rating: {{ product.averageRating }}</p>
+            <button id="add-to-cart">Add to cart</button>
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+
+        <NotFound v-else />
     </div>
 </template>
 
 <script>
-export default {
+import { products } from '../../data-seed';
+import NotFound from '../errors/ErrorsNotfound.vue';
 
+export default {
+  components: {
+    NotFound
+  },
+  data() {
+    return {
+      products
+    }
+  },
+  computed: {
+    product() {
+      return this.products.find((p) => {
+        return p.id === this.$route.params.id
+      })
+    }
+  },
+  mounted() {
+   console.log(this.product) 
+  }
 }
 </script>
 
