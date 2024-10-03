@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { cartItems } from '../../data-seed';
+import axios from 'axios';
 import ItemCart from '../../components/ComponentsItemcart.vue';
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
   },
     data() {
         return {
-          cartItems
+          cartItems: []
         }
     },
     computed: {
@@ -34,6 +34,17 @@ export default {
                 0
             )
         }
+    },
+    async created() {
+        const result = await axios.get('http://localhost:8000/api/orders/user/1')
+        let data = Object.assign({},
+          ...(result.data.map(
+            result => ({
+              cart_items: result.products
+            })
+          ))
+        )
+        this.cartItems = data.cart_items
     }
 }
 </script>
