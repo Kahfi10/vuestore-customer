@@ -8,6 +8,7 @@
             :key="item.id"
 
             :item="item"
+            v-on:remove-item="removeFromCart($event)"
             />
             <h3 id="total-price">Rp{{ totalPrice }}</h3>
             <button id="checkout-button">CheckOut</button>
@@ -35,8 +36,15 @@ export default {
             )
         }
     },
+    methods: {
+      async removeFromCart(product) {
+        await axios.delete(
+          `http://localhost:8000/api/orders/user/1/product/${product}`
+        )
+      }
+    },
     async created() {
-        const result = await axios.get('http://localhost:8000/api/orders/user/1')
+        const result = await axios.get('http://localhost:8000/api/orders/user/1/')
         let data = Object.assign({},
           ...(result.data.map(
             result => ({

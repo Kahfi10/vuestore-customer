@@ -5,6 +5,7 @@ import ProductDetail from '../views/product/ProductDetail.vue'
 import Cart from '../views/cart/CartIndex.vue'
 import NotFound from '../views/errors/ErrorsNotfound.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
